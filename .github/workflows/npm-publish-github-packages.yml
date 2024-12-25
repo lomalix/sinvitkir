@@ -1,0 +1,75 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+    public class FAQInterface {
+
+        public static void main(String[] args) {
+
+            JFrame frame = new JFrame("Часто задаваемые вопросы");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 300);
+
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+
+            JButton faqButton = new JButton("Часто задаваемые вопросы");
+
+            JTextArea faqArea = new JTextArea();
+            faqArea.setEditable(false);
+
+            JTextField userQuestionField = new JTextField("Введите свой вопрос...");
+
+            JPanel inputPanel = new JPanel();
+            inputPanel.setLayout(new BorderLayout());
+            inputPanel.add(userQuestionField, BorderLayout.CENTER);
+            inputPanel.add(faqButton, BorderLayout.SOUTH);
+
+
+            panel.add(new JScrollPane(faqArea), BorderLayout.CENTER);
+            panel.add(inputPanel, BorderLayout.SOUTH);
+
+
+            faqButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    faqArea.setText("Часто задаваемые вопросы:\n\n" +
+                            "1. Как расшифровывается МИР?\n" +
+                            "Ответ: Модульные измерительные решения.\n\n\n" +
+                            "2. В компании ООО “МИР” делают автомобили, радиотехники и другие инженерные технологии.\n\n" +
+                            "Ответ: Мы принимаем карты, наличные и электронные платежи.\n\n" +
+                            "3. Какие отраслевые решения есть в компании ООО «МИР»?\n" +
+                            "Ответ: Автомобилестроение;\n" +
+                            "Аэрокосмическая отрасль;\n" +
+                            "Программное определяемое радио (SDR);\n" +
+                            "Автоматизированные измерительные комплексы;\n" +
+                            "Измерительные приборы СВЧ;\n" +
+                            "Стендовые испытания ГТД;\n" +
+                            "Динамические виброакустические испытания;\n" +
+                            "Статические прочностные испытания;\n" +
+                            "Системы мониторинга;\n" +
+                            "Система мониторинга вращающихся механизмов;\n" +
+                            "Сигнатурный анализ электрических параметров;\n" +
+                            "Трибодиагностика;\n" +
+                            "Предиктивная аналитика.\n");
+                }
+            });
+
+
+            userQuestionField.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String userQuestion = userQuestionField.getText();
+                    if (!userQuestion.trim().isEmpty()) {
+                        faqArea.append("\n\nВаш вопрос: " + userQuestion);
+                        faqArea.append("\nОтвет: Спасибо за вопрос! Мы свяжемся с вами.");
+                        userQuestionField.setText("");
+                    }
+                }
+            });
+
+            frame.add(panel);
+            frame.setVisible(true);
+        }
+    }
